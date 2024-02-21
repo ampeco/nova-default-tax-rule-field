@@ -109,6 +109,10 @@ class DefaultTaxRuleField extends Field
         $input = $request->input($this->attribute) ?? null;
         $input = json_decode($input, true);
 
+        // Do validation
+        $rules = $this->getFormattedRules($request);
+        Validator::make([$this->attribute => $input], $rules)->validate();
+
         foreach ($input as $rows => $rowValues) {
             foreach ($rowValues as $rowKey => $rowValue) {
                 $model->{$rowKey} = $rowValue;
