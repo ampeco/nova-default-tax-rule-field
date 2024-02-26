@@ -111,7 +111,13 @@ class DefaultTaxRuleField extends Field
 
         // Do validation
         $rules = $this->getFormattedRules($request);
-        Validator::make([$this->attribute => $input], $rules)->validate();
+        $validationData = [];
+        if ($request->input('viaRelationship')) {
+            $validationData[$request->input('viaRelationship')][] = [$this->attribute => $input];
+        } else {
+            $validationData[$this->attribute] = $input;
+        }
+        Validator::make($validationData, $rules)->validate();
 
         foreach ($input as $rows => $rowValues) {
             foreach ($rowValues as $rowKey => $rowValue) {
@@ -128,7 +134,11 @@ class DefaultTaxRuleField extends Field
                 return $field->isReadonly($request);
             })->mapWithKeys(function ($field) use ($request) {
                 return $field->getUpdateRules($request);
-            })->mapWithKeys(function ($value, $key) {
+            })->mapWithKeys(function ($value, $key) use ($request) {
+                if ($request->input('viaRelationship')) {
+                    return ["{$request->input('viaRelationship')}.*.{$this->attribute}.*.$key" => $value];
+                }
+
                 return ["{$this->attribute}.*.$key" => $value];
             })->all()
         );
