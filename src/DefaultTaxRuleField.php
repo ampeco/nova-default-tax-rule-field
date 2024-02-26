@@ -106,6 +106,11 @@ class DefaultTaxRuleField extends Field
 
     public function fill(NovaRequest $request, $model)
     {
+        // A fix for a bug caused by HasManyNested.
+        if (str_starts_with($request->query->get('action'), 'remove-')) {
+            return;
+        }
+
         $input = $request->input($this->attribute) ?? null;
         $input = json_decode($input, true);
 
