@@ -114,6 +114,10 @@ class DefaultTaxRuleField extends Field
         $input = $request->input($this->attribute) ?? null;
         $input = json_decode($input, true);
 
+        if (!$input) {
+            return;
+        }
+
         // Do validation
         $rules = $this->getFormattedRules($request);
         $validationData = [];
