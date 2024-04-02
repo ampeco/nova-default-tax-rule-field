@@ -51,7 +51,7 @@ export default {
 
   computed: {
     values() {
-      let value = this.field.value;
+      let value = this.field.rows;
       if (!value) return void 0;
 
       if (Array.isArray(value)) return this.handleValue(value);
