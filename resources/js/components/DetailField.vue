@@ -27,7 +27,7 @@
                   :key="j"
                   :is="`detail-${rowField.component}`"
                   :field="rowField"
-                  class="o1-mr-3"
+                  class=""
                   :unique-id="getUniqueId(field, rowField)"
                 />
               </td>
@@ -157,6 +157,10 @@ export default {
       > :nth-child(2) {
         width: 100% !important;
         padding: 0 !important;
+        text-align: center !important;
+        > p {
+          display: block !important;
+        }
       }
     }
   }
@@ -165,6 +169,14 @@ export default {
     td {
       padding: 4px 8px;
     }
+  }
+
+  > div:nth-child(1) {
+    display: none;
+  }
+
+  > div:nth-child(2) {
+    width: 100%;
   }
 }
 </style>
