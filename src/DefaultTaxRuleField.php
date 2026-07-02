@@ -173,7 +173,7 @@ class DefaultTaxRuleField extends Field
      * @param string|null $attribute
      * @return void
      */
-    public function resolve($resource, $attribute = null)
+    public function resolve($resource, ?string $attribute = null): void
     {
         $novaRequest = app()->make(NovaRequest::class);
         $resolveForDisplay = $novaRequest->isResourceIndexRequest() || $novaRequest->isResourceDetailRequest();
@@ -193,7 +193,7 @@ class DefaultTaxRuleField extends Field
             'fields' => $this->fields->resolve(null) // Empty fields
         ]);
 
-        return parent::resolve($resource, $attribute);
+        parent::resolve($resource, $attribute);
     }
 
     /**
