@@ -91,8 +91,7 @@
 
 <script>
 import Draggable from 'vuedraggable';
-import { Errors } from 'form-backend-validation';
-import { FormField, HandlesValidationErrors, DependentFormField } from 'laravel-nova';
+import { Errors, FormField, HandlesValidationErrors, DependentFormField } from 'laravel-nova';
 import HandlesRepeatable from '../mixins/HandlesRepeatable';
 import _set from 'lodash/set';
 
